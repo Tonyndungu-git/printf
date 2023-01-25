@@ -27,7 +27,7 @@ int _printf(const char *format, ...)
 				numOfChar++;
 				break;
 			case 's':
-				numOfChar = loopstr(format);
+				numOfChar = loopstr(va_arg(args ,char *));
 				break;
 			case '%':
 				_putchar(format[i]);
