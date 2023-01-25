@@ -22,8 +22,6 @@ int _printf(const char *format, ...)
 			i++;
 			switch (format[i])
 			{
-
-<<<<<<< HEAD
 			case 'c':
 				_putchar(va_arg(args, int));
 				numOfChar++;
@@ -37,26 +35,13 @@ int _printf(const char *format, ...)
 				break;
 			default :
 				_putchar(format[i]);
-=======
-				case 'c':
-					_putchar(va_arg(args, int));
-					numOfChar++;
-					break;
-				case 's':
-					numOfChar = _puts(va_arg(args, char *));
-					break;
-				
-				case '%':
-					_putchar(format[i]);
-					numOfChar++;
-					break;
-				default :
-					_putchar(format[i]);
+				numOfChar++;
+				break;
 			}
 		}else
 		{
 			_putchar(format[i]);
->>>>>>> 3dc08cce075b57f4becb699b5cad26a758f92845
+			numOfChar++;
 		}
 	}
 	va_end(args);
