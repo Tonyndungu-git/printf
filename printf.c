@@ -62,7 +62,7 @@ int _printf(const char *format, ...)
 			len_buf++;
 		}
 		
-		if (format[i] == 'd' || format[i] == 'i')
+		if (format[i] == 'd')
 		{
 			print_num();
 		}
