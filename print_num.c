@@ -7,9 +7,12 @@
  */
 
 int _putchar(char c);
+int _numlen(int n);
 
-void print_num(int n)
+int print_num(int n)
 {
+	
+	len = _numlen(n);
 	unsigned int num = n;
 
 	if (n < 0)
@@ -22,4 +25,5 @@ void print_num(int n)
 		print_num(num / 10);
 
 	_putchar((num % 10) + '0');
+	return (len);
 }
