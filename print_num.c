@@ -11,7 +11,8 @@ int _numlen(int n);
 
 int print_num(int n)
 {
-	
+
+	unsigned int len;
 	len = _numlen(n);
 	unsigned int num = n;
 
