@@ -1,5 +1,6 @@
 #include "main.h"
-#include <string.h>
+#include "string.h"
+
 /**
  * _printf - custom function that format and print data
  * @format:  list of types of arguments passed to the function
@@ -13,13 +14,14 @@ int _printf(const char *format, ...)
 	int len_buf = 0;
 	char *s;
 	char *create_buff;
-
 	type_t ops[] = {
 		{"c", print_c},
 		{"s", print_s},
+		{"b", print_bin},
 		{NULL, NULL}
 	};
 	create_buff = malloc(1024 * sizeof(char));
+
 	if (create_buff == NULL)
 	{
 		free(create_buff);
@@ -34,8 +36,6 @@ int _printf(const char *format, ...)
 			continue;
 		else if (format[i] == '%')
 		{
-			if (format[i + 1] == ' ')
-				i += _position(format, i);
 			for (j = 0; ops[j].f != NULL; j++)
 			{
 				if (format[i + 1] == *(ops[j].op))
@@ -43,7 +43,7 @@ int _printf(const char *format, ...)
 					s = ops[j].f(args);
 					if (s == NULL)
 						return (-1);
-					strncat(create_buff, s, len_buf);
+					_strcat(create_buff, s, len_buf);
 					len_buf += strlen(s);
 					i++;
 					break;
@@ -66,4 +66,33 @@ int _printf(const char *format, ...)
 	va_end(args);
 	free(create_buff);
 	return (len_buf);
+}
+
+#include <limits.h>
+#include <stdio.h>
+#include "main.h"
+
+/**
+ * main - Entry point
+ *
+ * Return: Always 0
+ */
+int main(void)
+{
+    int len;
+    int len2;
+    unsigned int ui;
+    void *addr;
+
+    len = _printf("Let's try to printf a simple sentence.\n");
+    len2 = printf("Let's try to printf a simple sentence.\n");
+    ui = (unsigned int)INT_MAX + 1024;
+    _printf("Character:[%c]\n", 'H');
+    printf("Character:[%c]\n", 'H');
+    _printf("String:[%s]\n", "I am a string !");
+    printf("String:[%s]\n", "I am a string !");
+    len = _printf("Percent:[%%]\n");
+    len2 = printf("Percent:[%%]\n");
+    _printf("%b\n", 98);
+    return (0);
 }

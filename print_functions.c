@@ -1,25 +1,28 @@
 #include "main.h"
-
+#include <stdio.h>
+#include <stdarg.h>
 /**
  * print_c - prints char
- * @args: arguement char
+ * @list: arguement char
  * Return: pointer args
  */
 
 char *print_c(va_list args)
 {
-	static char s[2] = {'0', '\0'};
+	static char s[2] = {0, '\0'};
 
 	s[0] = va_arg(args, int);
-
+	if (s[0] == '\0')
+		return (" ");
 	return (s);
 }
 
 /**
  * print_s - prints string
- * @args: list to print
+ * @list: list to print
  * Return: pointer args
  */
+
 char *print_s(va_list args)
 {
 	char *s;
@@ -30,47 +33,37 @@ char *print_s(va_list args)
 	return (s);
 }
 
-/**
- * _strncat - concatenates two strings
- * @dest: char pointer
- * @src: char pointer
- * @n: int
- * Return: char pointer
- */
-char *_strncat(char *dest, char *src, int n)
-{
-	int i;
-
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dest[n + i] = src[i];
-		i++;
-	}
-	return (dest);
-}
 
 /**
- * _position - return position on string
- * @s: string
- * @n: int
- * Return: postion on string
+ * print_bin - print binary
+ * @list: va_list
+ * Return: pointer to string of binary
  */
 
-int _position(const char *s, int n)
+char *print_bin(va_list args)
 {
+	unsigned int n = va_arg(args, unsigned int);
+	char s[1024];
+	char *b;
 	int i;
 
+	b = s;
 	i = 0;
 
-	while (*s)
+	if (n == 0)
 	{
-		if (s[n + 1] != ' ')
-		{
-			return (i);
-		}
-		n++;
-		i++;
+		s[++i] = '0';
 	}
-	return (0);
+
+	while (n != 0)
+	{
+		s[i] = (n % 2) + '0';
+		i++;
+		n /= 2;
+	}
+
+	rev_string(s);
+	s[i] = '\0';
+
+	return (b);
 }
