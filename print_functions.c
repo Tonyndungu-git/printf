@@ -20,11 +20,11 @@ char *print_c(va_list args)
  * @args: list to print
  * Return: pointer args
  */
-char *print_s(va_list list)
+char *print_s(va_list args)
 {
 	char *s;
 
-	s = va_arg(list, char *);
+	s = va_arg(args, char *);
 	if (s == NULL)
 		return (s = "(null)");
 	return (s);
@@ -48,4 +48,29 @@ char *_strncat(char *dest, char *src, int n)
 		i++;
 	}
 	return (dest);
+}
+
+/**
+ * _position - return position on string
+ * @s: string
+ * @n: int
+ * Return: postion on string
+ */
+
+int _position(const char *s, int n)
+{
+	int i;
+
+	i = 0;
+
+	while (*s)
+	{
+		if (s[n + 1] != ' ')
+		{
+			return (i);
+		}
+		n++;
+		i++;
+	}
+	return (0);
 }

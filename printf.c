@@ -34,6 +34,8 @@ int _printf(const char *format, ...)
 			continue;
 		else if (format[i] == '%')
 		{
+			if (format[i + 1] == ' ')
+				i += _position(format, i);
 			for (j = 0; ops[j].f != NULL; j++)
 			{
 				if (format[i + 1] == *(ops[j].op))
@@ -64,4 +66,27 @@ int _printf(const char *format, ...)
 	va_end(args);
 	free(create_buff);
 	return (len_buf);
+}
+
+#include <limits.h>
+#include <stdio.h>
+#include "main.h"
+
+/**
+ * main - Entry point
+ *
+ * Return: Always 0
+ */
+int main(void)
+{
+
+     _printf("Let's try to printf a simple sentence.\n");
+     printf("Let's try to printf a simple sentence.\n");
+     _printf("Character:[%c]\n", 'H');
+     printf("Character:[%c]\n", 'H');
+     _printf("String:[%s]\n", "I am a string !");
+     printf("String:[%s]\n", "I am a string !");
+     _printf("Percent:[%%]\n");
+     printf("Percent:[%%]\n");
+    return (0);
 }

@@ -10,7 +10,7 @@
 
 int _printf(const char *format, ...);
 char *_strcat(char *dest, char *src, int n);
-
+int _position(const char *s, int n);
 
 /**
  * struct type - Struct data type
