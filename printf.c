@@ -1,5 +1,5 @@
 #include "main.h"
-#include <string.c>
+#include <string.h>
 /**
  * _printf - custom function that format and print data
  * @format:  list of types of arguments passed to the function
@@ -8,7 +8,7 @@
 
 int _printf(const char *format, ...)
 {
-	va_list list;
+	va_list args;
 	int i, j;
 	int len_buf = 0;
 	char *s;
@@ -25,8 +25,8 @@ int _printf(const char *format, ...)
 		free(create_buff);
 		return (-1);
 	}
-	va_start(list, format);
-	if (format == NULL || list == NULL)
+	va_start(args, format);
+	if (format == NULL || args == NULL)
 		return (-1);
 	for (i = 0; format[i] != '\0'; i++)
 	{
@@ -38,12 +38,11 @@ int _printf(const char *format, ...)
 			{
 				if (format[i + 1] == *(ops[j].op))
 				{
-					s = ops[j].f(list);
+					s = ops[j].f(args);
 					if (s == NULL)
 						return (-1);
-					strlen(s);
-					strcat(create_buff, s, len_buf);
-					len_buf += _strlen(s);
+					strncat(create_buff, s, len_buf);
+					len_buf += strlen(s);
 					i++;
 					break;
 				}
@@ -62,7 +61,29 @@ int _printf(const char *format, ...)
 	}
 	create_buff[len_buf] = '\0';
 	write(1, create_buff, len_buf);
-	va_end(list);
+	va_end(args);
 	free(create_buff);
 	return (len_buf);
+}
+#include <limits.h>
+#include <stdio.h>
+#include "main.h"
+
+/**
+ * main - Entry point
+ *
+ * Return: Always 0
+ */
+int main(void)
+{
+
+     _printf("Let's try to printf a simple sentence.\n");
+     printf("Let's try to printf a simple sentence.\n");
+     _printf("Character:[%c]\n", 'H');
+     printf("Character:[%c]\n", 'H');
+     _printf("String:[%s]\n", "I am a string !");
+     printf("String:[%s]\n", "I am a string !");
+     _printf("Percent:[%%]\n");
+     printf("Percent:[%%]\n");
+    return (0);
 }
