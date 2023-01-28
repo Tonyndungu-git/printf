@@ -1,70 +1,50 @@
 #include "main.h"
-#include "string.h"
 
 /**
- * _printf - custom function that format and print data
- * @format:  list of types of arguments passed to the function
- * Return: int
+ * _printf - print output to stdout according to a format string
+ * @format: the format of the string to print
+ * Return: number of characters printed (excluding null byte)
  */
+
 int _printf(const char *format, ...)
 {
+	int count = 0;
 	va_list args;
-	int i, j;
-	int len_buf = 0;
-	char *s;
-	char *create_buff;
-	type_t ops[] = {
-		{"c", print_c},
-		{"s", print_s},
-		{"b", print_bin},
-		{"i", print_i},
-		{"d", print_i},
-		{NULL, NULL}
-	};
-	create_buff = malloc(1024 * sizeof(char));
+	int (*function)(va_list) = NULL;
 
-	if (create_buff == NULL)
-	{
-		free(create_buff);
-		return (-1);
-	}
 	va_start(args, format);
-	if (format == NULL || args == NULL)
-		return (-1);
-	for (i = 0; format[i] != '\0'; i++)
+
+	while (*format)
 	{
-		if (format[i] == '%' && format[i + 1] == '%')
-			continue;
-		else if (format[i] == '%')
+		if (*format == '%' && *(format + 1) != '%')
 		{
-			for (j = 0; ops[j].f != NULL; j++)
+			format++;
+			function = get_function(format);
+			if (*(format) == '\0')
+				return (-1);
+			else if (function == NULL)
 			{
-				if (format[i + 1] == *(ops[j].op))
-				{
-					s = ops[j].f(args);
-					if (s == NULL)
-						return (-1);
-					_strcat(create_buff, s, len_buf);
-					len_buf += strlen(s);
-					i++;
-					break;
-				}
+				_putchar(*(format - 1));
+				_putchar(*format);
+				count += 2;
 			}
-			if (ops[j].f == NULL)
-			{
-				create_buff[len_buf] = format[i];
-				len_buf++;
-			}
+			else
+				count += function(args);
+		}
+		else if (*format == '%' && *(format + 1) == '%')
+		{
+			format++;
+			_putchar('%');
+			count++;
 		}
 		else
 		{
-			create_buff[len_buf] = format[i];
-			len_buf++;
+			_putchar(*format);
+			count++;
 		}
+
+		format++;
 	}
-	create_buff[len_buf] = '\0';
-	write(1, create_buff, len_buf);
 	va_end(args);
-	free(create_buff);
-	return (len_buf);
+	return (count);
 }

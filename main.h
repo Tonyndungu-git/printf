@@ -1,40 +1,40 @@
-#ifndef _MAIN_H
-#define _MAIN_H
+#ifndef MAIN_H
+#define MAIN_H
 
-#include <stdarg.h>
 #include <stdlib.h>
+#include <stdarg.h>
 #include <unistd.h>
-#include <stdio.h>
-
-
-
-int _printf(const char *format, ...);
-char *_strcat(char *dest, char *src, int n);
-char *print_bin(va_list list);
-int _strlen(char *s);
-int _abs(int n);
-int _numlen(int n);
-void *rev_string(char *s);
-char *print_i(va_list list);
-
-
-
-/*
-int _putchar(char c);
-int loopstr(const char *str);
-void print_num(int n);
-int _puts(char *p);
-*/
-
+/**
+ * struct type - connect conversion specifiers with the correct print function
+ * @print: a function pointer for the print functions
+ * @identifier: the conversion specifier
+ */
 typedef struct type
 {
-	char *op;
-	char *(*f)(va_list); 
-
-
+	char *identifier;
+	int (*print)(va_list);
 } type_t;
-char *print_c(va_list args);
-char *print_s(va_list args);
 
+int _putchar(char c);
+int (*get_function(const char *specifier))(va_list);
+int _printf(const char *, ...);
+int _strlen(char *);
+int print_rev(va_list args);
+int rot13(va_list args);
+int print_number(unsigned int n);
+int countDigits(unsigned int num);
+int countOctal(unsigned int num);
+int countBinary(unsigned int num);
+int print_b(va_list args);
+int print_o(va_list args);
+int print_d(va_list args);
+int print_x(va_list args);
+void print_lowerHex(unsigned int num, int *count);
+int print_X(va_list args);
+void print_upperHex(unsigned int num, int *count);
+int print_p(va_list args);
+int print_s(va_list args);
+int print_c(va_list args);
+int print_u(va_list args);
 
 #endif
