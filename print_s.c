@@ -9,21 +9,14 @@
 
 int print_s(va_list args)
 {
+	int j;
 	char *str = va_arg(args, char *);
-	int count = 0;
-	int retVal;
 
-	if (!str)
+	if (str == NULL)
 		str = "(null)";
-
-	while (*str)
+	for (j = 0; str[j]; j++)
 	{
-		retVal = _putchar(*str);
-		if (retVal == -1)
-			return (-1);
-		count++;
-		str++;
+		_putchar(str[j]);
 	}
-
-	return (count);
+	return (j);
 }
