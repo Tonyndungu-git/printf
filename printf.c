@@ -61,7 +61,6 @@ int _printf(const char *format, ...)
 			create_buff[len_buf] = format[i];
 			len_buf++;
 		}
-		
 		if (format[i] == 'd' || format[i] == 'i')
 		{
 			print_num();
