@@ -17,6 +17,8 @@ int _printf(const char *format, ...)
 		{"c", print_c},
 		{"s", print_s},
 		{"b", print_bin},
+		{"i", print_i},
+		{"d", print_i},
 		{NULL, NULL}
 	};
 	create_buff = malloc(1024 * sizeof(char));
@@ -59,17 +61,46 @@ int _printf(const char *format, ...)
 			create_buff[len_buf] = format[i];
 			len_buf++;
 		}
-<<<<<<< HEAD
-		if (format[i] == 'd' || format[i] == 'i')
-		{
-			print_num();
-		}
-=======
->>>>>>> 0d5228b408f269b0ccf50455a9fdd8a0d0b8c758
 	}
 	create_buff[len_buf] = '\0';
 	write(1, create_buff, len_buf);
 	va_end(args);
 	free(create_buff);
 	return (len_buf);
+}
+
+#include <limits.h>
+#include <stdio.h>
+#include "main.h"
+
+/**
+ * main - Entry point
+ *
+ * Return: Always 0
+ */
+int main(void)
+{
+    int len;
+    int len2;
+    unsigned int ui;
+    void *addr;
+
+    len = _printf("Let's try to printf a simple sentence.\n");
+    len2 = printf("Let's try to printf a simple sentence.\n");
+    ui = (unsigned int)INT_MAX + 1024;
+    _printf("Character:[%c]\n", 'H');
+    printf("Character:[%c]\n", 'H');
+    _printf("String:[%s]\n", "I am a string !");
+    printf("String:[%s]\n", "I am a string !");
+    len = _printf("Percent:[%%]\n");
+    len2 = printf("Percent:[%%]\n");
+    _printf("%b\n", 98);
+    _printf("Length:[%d, %i]\n", len, len);
+    printf("Length:[%d, %i]\n", len2, len2);
+    _printf("Negative:[%d]\n", -762534);
+    printf("Negative:[%d]\n", -762534);
+
+
+
+    return (0);
 }

@@ -15,7 +15,7 @@ int _strlen(char *s);
 int _abs(int n);
 int _numlen(int n);
 void *rev_string(char *s);
-
+char *print_i(va_list list);
 
 
 
