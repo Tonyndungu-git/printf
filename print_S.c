@@ -1,3 +1,6 @@
+#include "main.h"
+
+
 /**
  * print_S - prints a string & allows to display values that aren't ASCII
  * @S: string to print
