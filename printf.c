@@ -6,8 +6,6 @@
  * @format:  list of types of arguments passed to the function
  * Return: int
  */
-int print_num();
-
 int _printf(const char *format, ...)
 {
 	va_list args;
@@ -61,10 +59,13 @@ int _printf(const char *format, ...)
 			create_buff[len_buf] = format[i];
 			len_buf++;
 		}
+<<<<<<< HEAD
 		if (format[i] == 'd' || format[i] == 'i')
 		{
 			print_num();
 		}
+=======
+>>>>>>> 0d5228b408f269b0ccf50455a9fdd8a0d0b8c758
 	}
 	create_buff[len_buf] = '\0';
 	write(1, create_buff, len_buf);
