@@ -3,7 +3,7 @@
 #include <stdarg.h>
 /**
  * print_c - prints char
- * @list: arguement char
+ * @args: arguement char
  * Return: pointer args
  */
 
@@ -19,7 +19,7 @@ char *print_c(va_list args)
 
 /**
  * print_s - prints string
- * @list: list to print
+ * @args: list to print
  * Return: pointer args
  */
 
@@ -36,7 +36,7 @@ char *print_s(va_list args)
 
 /**
  * print_bin - print binary
- * @list: va_list
+ * @args: va_list
  * Return: pointer to string of binary
  */
 

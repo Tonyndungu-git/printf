@@ -1,14 +1,10 @@
 #include "main.h"
 #include <stdarg.h>
-
-
 /**
  * print_i - Prints an integer
- * @list: list of arguments
- * Return: pointer args
+ * @args: list of arguments
+ * Return: pointer
  */
-
-
 char *print_i(va_list args)
 {
 	int digit = 0, i = 0, neg = 0;
