@@ -20,10 +20,8 @@ int _printf(const char *format, ...)
 		{
 			format++;
 			function = get_function(format);
-
 			if (*(format) == '\0')
 				return (-1);
-
 			else if (function == NULL)
 			{
 				_putchar(*(format - 1));
