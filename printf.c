@@ -22,6 +22,10 @@ int _printf(const char *format, ...)
 			function = get_function(format);
 			if (*(format) == '\0')
 				return (-1);
+			if (!format || (format[0] == '%' && !format[1]))
+				return (-1);
+			if (format[0] == '%' && format[1] == ' ' && !format[2])
+				return (-1);
 			else if (function == NULL)
 			{
 				_putchar(*(format - 1));
